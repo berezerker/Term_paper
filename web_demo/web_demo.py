@@ -5,6 +5,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import onnxruntime as ort
 import torchvision.transforms as tt
+import time
 
 sys.path.append("../")
 
@@ -23,12 +24,14 @@ def main():
         to_tensor = tt.Compose([tt.Resize((512, 512)), tt.ToTensor()])
         img = to_tensor(img).unsqueeze(0).numpy()
         ort_session = ort.InferenceSession("../saved_models/exported/final_19_05_23.onnx")
-
+        start_time = time.time()
         outputs = ort_session.run(
             None,
             {"actual_input": img},
         )
+        elapsed_time = 1000 * (time.time() - start_time)
         outputs = outputs[0][0]
+        st.text(f"Inference finished. Time elapsed: {elapsed_time:.1f}ms.")
         st.text(f"Image has blur with probability {outputs[0] * 100:.1f}%")
         st.text(f'Image has moire with probability {outputs[1] * 100:.1f}%')
         st.text(f'Image has haze with probability {outputs[2] * 100:.1f}%')
