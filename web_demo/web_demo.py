@@ -13,7 +13,7 @@ root_dir = os.path.dirname(__file__)
 
 
 def main():
-    st.header("Detection of blurred image demo")
+    st.header("Detection of degraded image demo")
     st.write("Upload your image for detecting:")
 
     uploaded_file = st.file_uploader("Choose an image...")
@@ -23,7 +23,7 @@ def main():
         st.image(img, "your image")
         to_tensor = tt.Compose([tt.Resize((512, 512)), tt.ToTensor()])
         img = to_tensor(img).unsqueeze(0).numpy()
-        ort_session = ort.InferenceSession("../saved_models/exported/final_19_05_23.onnx")
+        ort_session = ort.InferenceSession("../saved_models/exported/final_24_05_23.onnx")
         start_time = time.time()
         outputs = ort_session.run(
             None,
@@ -32,7 +32,7 @@ def main():
         elapsed_time = 1000 * (time.time() - start_time)
         outputs = outputs[0][0]
         st.text(f"Inference finished. Time elapsed: {elapsed_time:.1f}ms.")
-        st.text(f"Image has blur with probability {outputs[0] * 100:.1f}%")
+        st.text(f'Image has blur with probability {outputs[0] * 100:.1f}%')
         st.text(f'Image has moire with probability {outputs[1] * 100:.1f}%')
         st.text(f'Image has haze with probability {outputs[2] * 100:.1f}%')
         st.text(f'Image has rain with probability {outputs[3] * 100:.1f}%')
