@@ -16,8 +16,7 @@ EP_list = ['CUDAExecutionProvider', 'CPUExecutionProvider']
 
 @st.cache(allow_output_mutation=True)
 def create_inference():
-    ort_session = ort.InferenceSession("saved_models/exported/final_24_05_23.onnx", providers = EP_list)
-    ort_session.set_providers(['CUDAExecutionProvider'])
+    ort_session = ort.InferenceSession("saved_models/exported/final_25_05_23.onnx", providers = EP_list)
     dummy_tensor = np.random.rand(1,3,512,512).astype("float32")
     outputs = ort_session.run(
             None,
@@ -35,7 +34,8 @@ def predict(img, session):
     return elapsed_time, outputs[0][0]
 
 ort_session = create_inference()
-    
+
+st.header('Web demo for detection of degraded images')
 uploaded_file = st.file_uploader("Choose an image...")
 
 if uploaded_file is None:
