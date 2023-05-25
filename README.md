@@ -32,7 +32,9 @@ In Order to run the web demonstration, type the following
 streamlit run web_demo.py
 ```
 # Runtime
-
-[Example of the inferece with a clear image](readme_data/demo_runtime_clear.png)
-[Example of the inferece with an image, that has rain](readme_data/demo_runtime.png)
-[Example of the inferece with an image, that has both blur and moire on it](readme_data/demo_runtime_2.png)
+## Our model is trained in a way that it tries to detect each detection separately. Here, we pass it an image without any visiable degaradations.
+![Example of the inferece with a clear image](readme_data/demo_runtime_clear.png)
+## We can detect a single degradation.
+![Example of the inferece with an image, that has rain](readme_data/demo_runtime.png)
+## And multiple, which is a rare case.
+![Example of the inferece with an image, that has both blur and moire on it](readme_data/demo_runtime_2.png)
