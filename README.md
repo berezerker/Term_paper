@@ -7,6 +7,7 @@ This project aimed to develop a multi-label classification model for 4 types of 
 # Architecture
 
 We based the architecture of our model on [MobileViT: Light-weight, General-purpose, and Mobile-friendly Vision Transformer](https://arxiv.org/abs/2110.02178)
+You can find the model, converted to onnx( this one is used for inferencing in this application) in saved_models/exported folder.
 
 # Metrics
 
@@ -19,9 +20,6 @@ We collected metrics on each class separately and a total F1-score. You can see 
 | Rain             | 0.817          | 0.97       | 0.89     |
 | Total            | None           | None       | 0.95     |
 
-# Model
-The final model is located in folder saved_models/.
-
 # Requirements
 install the requirements by running 
 ```code
@@ -33,3 +31,6 @@ In Order to run the web demonstration, type the following
 ```code
 streamlit run web_demo.py
 ```
+# Runtime
+
+
