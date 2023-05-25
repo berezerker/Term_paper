@@ -12,7 +12,7 @@ We based the architecture of our model on [MobileViT: Light-weight, General-purp
 
 We collected metrics on each class separately and a total F1-score. You can see obtained metrics here.
 | class/metric     | precision      | recall     | F1-score |
-| ------------- | ------------- | -------- |
+| -------------    | -------------  | --------   |          |
 | Blur          | 0.94         | 0.977  | 0.956 |
 | Moire          | 0.929         | 0.981  | 0.955 |
 | Haze          | 0.997         | 0.999  | 0.998 |
