@@ -360,14 +360,31 @@ def load_model(path):
     loaded_model.eval()
     return loaded_model
 
+def create_inference(path):
+    ort_session = ort.InferenceSession(path, providers =['CUDAExecutionProvider', 'CPUExecutionProvider'])
+    return ort_session
+
 def main():
+    
+    #EXPORTING THE MODEL
     dummy_input = torch.randn(1, 3, 512, 512, device="cuda")
     model = load_model('../saved_models/mobilevit_full_mixed_regularized_24_05_23.pt')
-
+    
     input_names = [ "actual_input" ]
     output_names = [ "output" ]
+    export_name = "../saved_models/exported/final_25_05_23_export_script.onnx"
+    torch.onnx.export(model, dummy_input, export_name, export_params=True, verbose=True, input_names=input_names, output_names=output_names)
+    #LOADING EXPORTED MODEL
+    ort_session = create_inference(export_name)
 
-    torch.onnx.export(model, dummy_input, "../saved_models/exported/final_25_05_23_export_script.onnx", export_params=True, verbose=True, input_names=input_names, output_names=output_names)
-
+    dummy_tensor = np.random.rand(1,3,512,512).astype("float32")
+    outputs = ort_session.run(
+            None,
+            {"actual_input": dummy_tensor},
+        )
+    outputs_export = outputs[0][0]
+    outputs_torch = model(dummy_input)
+    print(outputs_export)
+    print(outputs_torch)
 if __name__ == "__main__":
     main()
