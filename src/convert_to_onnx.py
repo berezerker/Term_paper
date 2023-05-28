@@ -365,11 +365,16 @@ def create_inference(path):
     return ort_session
 
 def main():
+    val_trans = T.Compose([T.Resize((512, 512)),
+                       T.ToTensor()])
     
     #EXPORTING THE MODEL
     dummy_input = torch.randn(1, 3, 512, 512, device="cuda")
     model = load_model('../saved_models/mobilevit_full_mixed_regularized_24_05_23.pt')
-    
+
+    #LOADING TEST IMAGE
+    img = Image.open('../test_images/haze.jpg')
+    img = val_trans(img).unsqueeze(0).to("cuda")
     input_names = [ "actual_input" ]
     output_names = [ "output" ]
     export_name = "../saved_models/exported/final_25_05_23_export_script.onnx"
@@ -380,10 +385,10 @@ def main():
     dummy_tensor = np.random.rand(1,3,512,512).astype("float32")
     outputs = ort_session.run(
             None,
-            {"actual_input": dummy_tensor},
+            {"actual_input": img.detach().cpu().numpy()},
         )
     outputs_export = outputs[0][0]
-    outputs_torch = model(dummy_input)
+    outputs_torch = model(img)
     print(outputs_export)
     print(outputs_torch)
 if __name__ == "__main__":

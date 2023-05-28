@@ -16,7 +16,7 @@ EP_list = ['CUDAExecutionProvider', 'CPUExecutionProvider']
 
 @st.cache(allow_output_mutation=True)
 def create_inference():
-    ort_session = ort.InferenceSession("saved_models/exported/final_25_05_23.onnx", providers = EP_list)
+    ort_session = ort.InferenceSession("saved_models/exported/final_25_05_23_export_script.onnx", providers = EP_list)
     dummy_tensor = np.random.rand(1,3,512,512).astype("float32")
     outputs = ort_session.run(
             None,
@@ -42,7 +42,6 @@ if uploaded_file is None:
     st.text('Waiting for upload...')
 else:
     slot = st.empty()
-    slot.text('Running inference....')
 
     img = Image.open(uploaded_file)
     st.image(img, "your image")
