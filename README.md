@@ -26,6 +26,13 @@ install the requirements by running
 pip install -r requirements.txt
 ```
 
+# Export
+You can see how the export is done in the script src/convert_to_onnx.py. Upon running it, it will show the results for both torch version and exported onnx version.
+The exported model already exists in saved_models/exported folder, the same model is used for inference, so by converting it again you will just replace it.
+```code
+python convert_to_onnx.py
+```
+
 # Web Demo
 In Order to run the web demonstration, type the following
 ```code
