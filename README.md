@@ -34,9 +34,14 @@ python convert_to_onnx.py
 ```
 
 # Web Demo
-In Order to run the web demonstration, type the following
+In Order to run the web demonstration, you have to specify the mode of execution: on CPU or GPU. for that you have to pass an argument mode, which can take "cpu" or "gpu" strings.
+So, for CPU execution go for
 ```code
-streamlit run web_demo.py
+streamlit run web_demo.py -- -m cpu
+```
+or for gpu, similarly
+```code
+streamlit run web_demo.py -- -m gpu
 ```
 # Runtime
 ## Our model is trained in a way that it tries to detect each detection separately. Here, we pass it an image without any visiable degaradations.
