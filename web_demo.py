@@ -41,7 +41,7 @@ def main():
     
     #PARSING EXECUTION MODE
     parser = argparse.ArgumentParser()
-    parser.add_argument('-m', '--mode', type=str, required=True, \
+    parser.add_argument('-m', '--mode', choices=['cpu', 'gpu'], type=str, required=True, \
                         help='define the mode of execution: cpu or gpu')
     args = parser.parse_args()
     
