@@ -8,7 +8,7 @@ This project aimed to develop a multi-label classification model for 4 types of 
 
 We based the architecture of our model on [MobileViT: Light-weight, General-purpose, and Mobile-friendly Vision Transformer](https://arxiv.org/abs/2110.02178)
 You can find the model, converted to onnx( this one is used for inferencing in this application) in saved_models/exported folder.
-
+The obtained model has around 5M parameters, weighs ~21Mb after conversion to ONNX. The time of inference on 2080TI is about 13-15ms.
 # Metrics
 
 We collected metrics on each class separately and a total F1-score. You can see obtained metrics here.
@@ -19,6 +19,7 @@ We collected metrics on each class separately and a total F1-score. You can see 
 | Haze             | 0.997          | 0.999      | 0.998    |
 | Rain             | 0.817          | 0.97       | 0.89     |
 | Total            | None           | None       | 0.95     |
+
 
 # Requirements
 install the requirements by running 
